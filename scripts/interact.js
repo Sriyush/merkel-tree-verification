@@ -1,6 +1,6 @@
 const hre = require("hardhat");
 const cors = require('cors');
-const app = express();
+// const app = express();
 async function main() {
   const contractAddress = "0x5D6a769a212Bcbbe20CCca1C0F60ecc8423f11d8";
   const MerkleVerification = await hre.ethers.getContractFactory("MerkleVerification");
