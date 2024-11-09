@@ -37,35 +37,36 @@ function App() {
     fetchMerkleRoot();
   }, []); // Empty dependency array to run once on mount
 
-  // Handle form submission
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!contract) return;
-  
-    try {
-      // Convert proof and transaction hash without extra formatting
-      const formattedProof = proof.split(',').map((item) => ethers.utils.hexlify(item.trim()));
-      const txHashBytes = ethers.utils.hexlify(transactionHash);
-  
-      // Send the data to the backend
-      const response = await fetch('http://localhost:5000/verifyTransaction', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          transactionHash: txHashBytes,
-          proof: formattedProof,
-        }),
-      });
-  
-      const data = await response.json();
-      setVerificationResult(data.isValid ? "Transaction is valid!" : "Transaction is not valid.");
-    } catch (error) {
-      console.error('Error verifying transaction:', error);
-      setVerificationResult("Error during verification.");
-    }
-  };
+// Frontend Component (React)
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  if (!contract) return;
+
+  try {
+    // Convert proof into an array of hex values and transaction hash to hex format
+    const formattedProof = proof.split(',').map((item) => ethers.utils.hexlify(item.trim()));
+    const txHashBytes = ethers.utils.hexlify(transactionHash);
+
+    // Send the data to the backend
+    const response = await fetch('http://localhost:5000/verifyTransaction', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        transactionHash: txHashBytes,
+        proof: formattedProof,
+      }),
+    });
+
+    const data = await response.json();
+    setVerificationResult(data.isValid ? "Transaction is valid!" : "Transaction is not valid.");
+  } catch (error) {
+    console.error('Error verifying transaction:', error);
+    setVerificationResult("Error during verification.");
+  }
+};
+
   
   return (
     <div>

@@ -16,6 +16,7 @@
     "@nomiclabs/hardhat-ethers": "^2.2.3",
     "dotenv": "^16.4.5",
     "ethers": "^5.7.2",
-    "ethersjs": "^0.0.1-security"
+    "ethersjs": "^0.0.1-security",
+    "express": "^4.21.1"
   }
 }
