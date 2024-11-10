@@ -9,7 +9,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const infuraUrl = 'https://sepolia.infura.io/v3/40b58eb3ecec453fa24d172bc65fad6c';
+const infuraUrl = `https://sepolia.infura.io/v3/${process.env.INFURA_PROJECT_ID}`;
 const web3 = new Web3(new Web3.providers.HttpProvider(infuraUrl));
 
 const provider = new ethers.providers.JsonRpcProvider(infuraUrl);
